@@ -41,7 +41,7 @@ public class EditorActivity extends AppCompatActivity implements
     private EditText mNameEditText;
 
     /** EditText field to enter the pet's breed */
-    private EditText mBreedEditText;
+    private EditText mQuantityEditText;
 
     /** EditText field to enter the pet's price */
     private EditText mPriceEditText;
@@ -101,7 +101,7 @@ public class EditorActivity extends AppCompatActivity implements
 
         // Find all relevant views that we will need to read user input from
         mNameEditText = (EditText) findViewById(R.id.edit_item_name);
-        mBreedEditText = (EditText) findViewById(R.id.edit_item_breed);
+        mQuantityEditText = (EditText) findViewById(R.id.edit_item_quantity);
         mPriceEditText = (EditText) findViewById(R.id.edit_item_price);
         mGenderSpinner = (Spinner) findViewById(R.id.spinner_gender);
 
@@ -109,7 +109,7 @@ public class EditorActivity extends AppCompatActivity implements
         // has touched or modified them. This will let us know if there are unsaved changes
         // or not, if the user tries to leave the editor without saving.
         mNameEditText.setOnTouchListener(mTouchListener);
-        mBreedEditText.setOnTouchListener(mTouchListener);
+        mQuantityEditText.setOnTouchListener(mTouchListener);
         mPriceEditText.setOnTouchListener(mTouchListener);
         mGenderSpinner.setOnTouchListener(mTouchListener);
 
@@ -164,7 +164,7 @@ public class EditorActivity extends AppCompatActivity implements
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
         String nameString = mNameEditText.getText().toString().trim();
-        String breedString = mBreedEditText.getText().toString().trim();
+        String breedString = mQuantityEditText.getText().toString().trim();
         String priceString = mPriceEditText.getText().toString().trim();
 
         // Check if this is supposed to be a new pet
@@ -364,7 +364,7 @@ public class EditorActivity extends AppCompatActivity implements
 
             // Update the views on the screen with the values from the database
             mNameEditText.setText(name);
-            mBreedEditText.setText(breed);
+            mQuantityEditText.setText(breed);
             mPriceEditText.setText(Integer.toString(price));
 
             // Gender is a dropdown spinner, so map the constant value from the database
@@ -388,7 +388,7 @@ public class EditorActivity extends AppCompatActivity implements
     public void onLoaderReset(Loader<Cursor> loader) {
         // If the loader is invalidated, clear out all the data from the input fields.
         mNameEditText.setText("");
-        mBreedEditText.setText("");
+        mQuantityEditText.setText("");
         mPriceEditText.setText("");
         mGenderSpinner.setSelection(0); // Select "Unknown" gender
     }

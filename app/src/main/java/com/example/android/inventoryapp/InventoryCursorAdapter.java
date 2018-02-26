@@ -65,16 +65,16 @@ public class InventoryCursorAdapter extends CursorAdapter {
 
         // Read the item attributes from the Cursor for the current item
         String itemName = cursor.getString(nameColumnIndex);
-        String itemBreed = cursor.getString(breedColumnIndex);
+        String itemQuantity = cursor.getString(breedColumnIndex);
 
         // If the item breed is empty string or null, then use some default text
         // that says "Unknown breed", so the TextView isn't blank.
-        if (TextUtils.isEmpty(itemBreed)) {
-            itemBreed = context.getString(R.string.unknown_quantity);
+        if (TextUtils.isEmpty(itemQuantity)) {
+            itemQuantity = context.getString(R.string.unknown_quantity);
         }
 
         // Update the TextViews with the attributes for the current item
         nameTextView.setText(itemName);
-        summaryTextView.setText(itemBreed);
+        summaryTextView.setText(itemQuantity);
     }
 }

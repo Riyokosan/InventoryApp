@@ -36,7 +36,7 @@
 
             <!-- Breed field -->
             <EditText
-                android:id="@+id/edit_item_breed"
+                android:id="@+id/edit_item_quantity"
                 android:hint="@string/hint_item_quantity"
                 android:inputType="textCapWords"
                 style="@style/EditorFieldStyle" />
