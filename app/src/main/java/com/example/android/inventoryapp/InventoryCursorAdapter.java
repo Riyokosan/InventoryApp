@@ -61,7 +61,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
 
         // Find the columns of item attributes that we're interested in
         int nameColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_NAME);
-        int breedColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_INVENTORY_BREED);
+        int breedColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_QUANTITY);
 
         // Read the item attributes from the Cursor for the current item
         String itemName = cursor.getString(nameColumnIndex);

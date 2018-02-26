@@ -20,7 +20,7 @@ public class InventoryProvider extends ContentProvider {
     /** URI matcher code for the content URI for the items table */
     private static final int INVENTORIES = 100;
 
-    /** URI matcher code for the content URI for a single pet in the items table */
+    /** URI matcher code for the content URI for a single item in the items table */
     private static final int INVENTORY_ID = 101;
 
     /**
@@ -150,7 +150,7 @@ public class InventoryProvider extends ContentProvider {
         // Get writable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
-        // Insert the new pet with the given values
+        // Insert the new item with the given values
         long id = database.insert(ItemEntry.TABLE_NAME, null, values);
         // If the ID is -1, then the insertion failed. Log an error and return null.
         if (id == -1) {
@@ -158,7 +158,7 @@ public class InventoryProvider extends ContentProvider {
             return null;
         }
 
-        // Notify all listeners that the data has changed for the pet content URI
+        // Notify all listeners that the data has changed for the item content URI
         getContext().getContentResolver().notifyChange(uri, null);
 
         // Return the new URI with the ID (of the newly inserted row) appended at the end

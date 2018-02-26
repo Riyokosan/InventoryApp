@@ -73,11 +73,11 @@ public final class InventoryContract {
         public final static String COLUMN_ITEM_NAME ="name";
 
         /**
-         * Breed of the item.
+         * Quantity of the item.
          *
          * Type: TEXT
          */
-        public final static String COLUMN_INVENTORY_BREED = "breed";
+        public final static String COLUMN_ITEM_QUANTITY = "quantity";
 
         /**
          * Gender of the item.

@@ -85,14 +85,14 @@ public class EditorActivity extends AppCompatActivity implements
         // creating a new pet.
         if (mCurrentItemUri == null) {
             // This is a new pet, so change the app bar to say "Add a Item"
-            setTitle(getString(R.string.editor_activity_title_new_pet));
+            setTitle(getString(R.string.editor_activity_title_new_item));
 
             // Invalidate the options menu, so the "Delete" menu option can be hidden.
             // (It doesn't make sense to delete a pet that hasn't been created yet.)
             invalidateOptionsMenu();
         } else {
             // Otherwise this is an existing pet, so change app bar to say "Edit Item"
-            setTitle(getString(R.string.editor_activity_title_edit_pet));
+            setTitle(getString(R.string.editor_activity_title_edit_item));
 
             // Initialize a loader to read the pet data from the database
             // and display the current values in the editor
@@ -182,7 +182,7 @@ public class EditorActivity extends AppCompatActivity implements
         ContentValues values = new ContentValues();
         values.put(ItemEntry.COLUMN_ITEM_NAME, nameString);
         values.put(ItemEntry.COLUMN_INVENTORY_GENDER, mGender);
-        values.put(ItemEntry.COLUMN_INVENTORY_BREED, breedString);
+        values.put(ItemEntry.COLUMN_ITEM_QUANTITY, breedString);
 
         // If the price is not provided by the user, don't try to parse the string into an
         // integer value. Use 0 by default.
@@ -327,7 +327,7 @@ public class EditorActivity extends AppCompatActivity implements
         String[] projection = {
                 ItemEntry._ID,
                 ItemEntry.COLUMN_ITEM_NAME,
-                ItemEntry.COLUMN_INVENTORY_BREED,
+                ItemEntry.COLUMN_ITEM_QUANTITY,
                 ItemEntry.COLUMN_INVENTORY_GENDER,
                 ItemEntry.COLUMN_ITEM_PRICE };
 
@@ -352,7 +352,7 @@ public class EditorActivity extends AppCompatActivity implements
         if (cursor.moveToFirst()) {
             // Find the columns of pet attributes that we're interested in
             int nameColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_NAME);
-            int breedColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_INVENTORY_BREED);
+            int breedColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_QUANTITY);
             int genderColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_INVENTORY_GENDER);
             int priceColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_PRICE);
 
