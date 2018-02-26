@@ -91,10 +91,9 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         // Create a ContentValues object where column names are the keys,
         // and the Strawberries item attributes are the values.
         ContentValues values = new ContentValues();
-        values.put(ItemEntry.COLUMN_ITEM_NAME, "Strawberries");
-        values.put(ItemEntry.COLUMN_ITEM_QUANTITY, "10kg");
-        values.put(ItemEntry.COLUMN_INVENTORY_GENDER, ItemEntry.GENDER_MALE);
-        values.put(ItemEntry.COLUMN_ITEM_PRICE, 8.25);
+        values.put(ItemEntry.COLUMN_ITEM_NAME, "Strawberry Cake");
+        values.put(ItemEntry.COLUMN_ITEM_QUANTITY, "10");
+        values.put(ItemEntry.COLUMN_ITEM_PRICE, 16.25);
 
         // Insert a new row for Toto into the provider using the ContentResolver.
         // Use the {@link ItemEntry#CONTENT_URI} to indicate that we want to insert

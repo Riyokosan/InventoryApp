@@ -24,11 +24,10 @@ public class InventoryDbHelper extends SQLiteOpenHelper  {
         String SQL_CREATE_ITEMS_TABLE =  "CREATE TABLE " + ItemEntry.TABLE_NAME + " ("
                 + ItemEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + ItemEntry.COLUMN_ITEM_NAME + " TEXT NOT NULL, "
-                + ItemEntry.COLUMN_ITEM_QUANTITY + " TEXT DEFAULT 1, "
-                + ItemEntry.COLUMN_INVENTORY_GENDER + " INTEGER NOT NULL, "
-                + ItemEntry.COLUMN_ITEM_PRICE + " DOUBLE NOT NULL);";
-        // Log the SQL statement
-        Log.v(LOG_TAG, "Current SQL statement" + SQL_CREATE_ITEMS_TABLE);
+                + ItemEntry.COLUMN_ITEM_QUANTITY + " INTEGER DEFAULT 1, "
+                + ItemEntry.COLUMN_ITEM_PRICE + " NUMERIC NOT NULL);";
+        // Log the SQL statement in case of error
+        Log.e(LOG_TAG, "Current SQL statement" + SQL_CREATE_ITEMS_TABLE);
         // Execute the SQL statement
         db.execSQL(SQL_CREATE_ITEMS_TABLE);
     }

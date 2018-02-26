@@ -130,22 +130,20 @@ public class InventoryProvider extends ContentProvider {
         // Check that the name is not null
         String name = values.getAsString(ItemEntry.COLUMN_ITEM_NAME);
         if (name == null) {
-            throw new IllegalArgumentException("Inventory requires a name");
+            throw new IllegalArgumentException("Item requires a name");
         }
 
-        // Check that the gender is valid
-        Integer gender = values.getAsInteger(ItemEntry.COLUMN_INVENTORY_GENDER);
-        if (gender == null || !ItemEntry.isValidGender(gender)) {
-            throw new IllegalArgumentException("Inventory requires valid gender");
+        // If the quantity is provided, check that it's greater than or equal to 0
+        Integer quantity = values.getAsInteger(ItemEntry.COLUMN_ITEM_QUANTITY);
+        if (quantity != null && quantity < 0) {
+            throw new IllegalArgumentException("Item requires a valid quantity");
         }
 
-        // If the weight is provided, check that it's greater than or equal to 0 kg
-        Integer weight = values.getAsInteger(ItemEntry.COLUMN_ITEM_PRICE);
-        if (weight != null && weight < 0) {
-            throw new IllegalArgumentException("Inventory requires valid weight");
+        // If the price is provided, check that it's greater than or equal to 0 €
+        Integer price = values.getAsInteger(ItemEntry.COLUMN_ITEM_PRICE);
+        if (price != null && price < 0) {
+            throw new IllegalArgumentException("Item requires a valid price");
         }
-
-        // No need to check the breed, any value is valid (including null).
 
         // Get writable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
@@ -200,27 +198,26 @@ public class InventoryProvider extends ContentProvider {
             }
         }
 
-        // If the {@link ItemEntry#COLUMN_INVENTORY_GENDER} key is present,
-        // check that the gender value is valid.
-        if (values.containsKey(ItemEntry.COLUMN_INVENTORY_GENDER)) {
-            Integer gender = values.getAsInteger(ItemEntry.COLUMN_INVENTORY_GENDER);
-            if (gender == null || !ItemEntry.isValidGender(gender)) {
-                throw new IllegalArgumentException("Inventory requires valid gender");
+        // If the {@link ItemEntry#COLUMN_ITEM_QUANTITY} key is present,
+        // check that the price value is valid.
+        if (values.containsKey(ItemEntry.COLUMN_ITEM_QUANTITY)) {
+            // Check that the price is greater than or equal to 0 kg
+            Integer quantity = values.getAsInteger(ItemEntry.COLUMN_ITEM_QUANTITY);
+            if (quantity != null && quantity < 0) {
+                throw new IllegalArgumentException("Item requires valid quantity");
             }
-        }
 
         // If the {@link ItemEntry#COLUMN_ITEM_PRICE} key is present,
-        // check that the weight value is valid.
+        // check that the price value is valid.
         if (values.containsKey(ItemEntry.COLUMN_ITEM_PRICE)) {
-            // Check that the weight is greater than or equal to 0 kg
-            Integer weight = values.getAsInteger(ItemEntry.COLUMN_ITEM_PRICE);
-            if (weight != null && weight < 0) {
-                throw new IllegalArgumentException("Inventory requires valid weight");
+            // Check that the price is greater than or equal to 0 kg
+            Integer price = values.getAsInteger(ItemEntry.COLUMN_ITEM_PRICE);
+            if (price != null && price < 0) {
+                throw new IllegalArgumentException("Item requires valid price");
             }
         }
 
-        // No need to check the breed, any value is valid (including null).
-
+        }
         // If there are no values to update, then don't try to update the database
         if (values.size() == 0) {
             return 0;

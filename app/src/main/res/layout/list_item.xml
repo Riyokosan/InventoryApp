@@ -8,9 +8,9 @@
 
     <TextView
         android:id="@+id/name"
-        style="@style/PetName" />
+        style="@style/ItemName" />
 
     <TextView
         android:id="@+id/summary"
-        style="@style/PetBreed" />
+        style="@style/ItemQuantity" />
 </LinearLayout>

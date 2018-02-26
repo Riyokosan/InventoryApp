@@ -17,16 +17,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.android.inventoryapp.data.InventoryContract.ItemEntry;
 
 /**
- * Allows user to create a new pet or edit an existing one.
+ * Allows user to create a new item or edit an existing one.
  */
 public class EditorActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<Cursor> {
@@ -37,24 +35,20 @@ public class EditorActivity extends AppCompatActivity implements
     /** Content URI for the existing pet (null if it's a new pet) */
     private Uri mCurrentItemUri;
 
-    /** EditText field to enter the pet's name */
+    /** EditText field to enter the item's name */
     private EditText mNameEditText;
 
-    /** EditText field to enter the pet's breed */
+    /** EditText field to enter the item's quantity */
     private EditText mQuantityEditText;
 
-    /** EditText field to enter the pet's price */
+    /** EditText field to enter the item's price */
     private EditText mPriceEditText;
 
-    /** EditText field to enter the pet's gender */
-    private Spinner mGenderSpinner;
+    /** Button field to enter if one item is sold */
+    private Button mSoldButton;
 
-    /**
-     * Gender of the pet. The possible valid values are in the ItemContract.java file:
-     * {@link ItemEntry#GENDER_UNKNOWN}, {@link ItemEntry#GENDER_MALE}, or
-     * {@link ItemEntry#GENDER_FEMALE}.
-     */
-    private int mGender = ItemEntry.GENDER_UNKNOWN;
+    /** Button field to enter if one item is sold */
+    private Button mSoldOutButton;
 
     /** Boolean flag that keeps track of whether the pet has been edited (true) or not (false) */
     private boolean mItemHasChanged = false;
@@ -103,7 +97,8 @@ public class EditorActivity extends AppCompatActivity implements
         mNameEditText = (EditText) findViewById(R.id.edit_item_name);
         mQuantityEditText = (EditText) findViewById(R.id.edit_item_quantity);
         mPriceEditText = (EditText) findViewById(R.id.edit_item_price);
-        mGenderSpinner = (Spinner) findViewById(R.id.spinner_gender);
+        mSoldButton = (Button) findViewById(R.id.sold_button);
+        mSoldOutButton = (Button) findViewById(R.id.sold_out_button);
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
@@ -111,50 +106,10 @@ public class EditorActivity extends AppCompatActivity implements
         mNameEditText.setOnTouchListener(mTouchListener);
         mQuantityEditText.setOnTouchListener(mTouchListener);
         mPriceEditText.setOnTouchListener(mTouchListener);
-        mGenderSpinner.setOnTouchListener(mTouchListener);
+        mSoldButton.setOnTouchListener(mTouchListener);
+        mSoldOutButton.setOnTouchListener(mTouchListener);
 
-        setupSpinner();
     }
-
-    /**
-     * Setup the dropdown spinner that allows the user to select the gender of the pet.
-     */
-    private void setupSpinner() {
-        // Create adapter for spinner. The list options are from the String array it will use
-        // the spinner will use the default layout
-        ArrayAdapter genderSpinnerAdapter = ArrayAdapter.createFromResource(this,
-                R.array.array_gender_options, android.R.layout.simple_spinner_item);
-
-        // Specify dropdown layout style - simple list view with 1 item per line
-        genderSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-
-        // Apply the adapter to the spinner
-        mGenderSpinner.setAdapter(genderSpinnerAdapter);
-
-        // Set the integer mSelected to the constant values
-        mGenderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selection = (String) parent.getItemAtPosition(position);
-                if (!TextUtils.isEmpty(selection)) {
-                    if (selection.equals(getString(R.string.gender_male))) {
-                        mGender = ItemEntry.GENDER_MALE;
-                    } else if (selection.equals(getString(R.string.gender_female))) {
-                        mGender = ItemEntry.GENDER_FEMALE;
-                    } else {
-                        mGender = ItemEntry.GENDER_UNKNOWN;
-                    }
-                }
-            }
-
-            // Because AdapterView is an abstract class, onNothingSelected must be defined
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                mGender = ItemEntry.GENDER_UNKNOWN;
-            }
-        });
-    }
-
 
 
     /**
@@ -164,14 +119,14 @@ public class EditorActivity extends AppCompatActivity implements
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
         String nameString = mNameEditText.getText().toString().trim();
-        String breedString = mQuantityEditText.getText().toString().trim();
+        String quantityString = mQuantityEditText.getText().toString().trim();
         String priceString = mPriceEditText.getText().toString().trim();
 
         // Check if this is supposed to be a new pet
         // and check if all the fields in the editor are blank
         if (mCurrentItemUri == null &&
-                TextUtils.isEmpty(nameString) && TextUtils.isEmpty(breedString) &&
-                TextUtils.isEmpty(priceString) && mGender == ItemEntry.GENDER_UNKNOWN) {
+                TextUtils.isEmpty(nameString) && TextUtils.isEmpty(quantityString) &&
+                TextUtils.isEmpty(priceString)) {
             // Since no fields were modified, we can return early without creating a new pet.
             // No need to create ContentValues and no need to do any ContentProvider operations.
             return;
@@ -181,16 +136,15 @@ public class EditorActivity extends AppCompatActivity implements
         // and pet attributes from the editor are the values.
         ContentValues values = new ContentValues();
         values.put(ItemEntry.COLUMN_ITEM_NAME, nameString);
-        values.put(ItemEntry.COLUMN_INVENTORY_GENDER, mGender);
-        values.put(ItemEntry.COLUMN_ITEM_QUANTITY, breedString);
+        values.put(ItemEntry.COLUMN_ITEM_PRICE, priceString);
 
-        // If the price is not provided by the user, don't try to parse the string into an
+        // If the weight is not provided by the user, don't try to parse the string into an
         // integer value. Use 0 by default.
-        int price = 0;
-        if (!TextUtils.isEmpty(priceString)) {
-            price = Integer.parseInt(priceString);
+        int quantity = 1;
+        if (!TextUtils.isEmpty(quantityString)) {
+            quantity = Integer.parseInt(quantityString);
         }
-        values.put(ItemEntry.COLUMN_ITEM_PRICE, price);
+        values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantityString);
 
         // Determine if this is a new or existing pet by checking if mCurrentItemUri is null or not
         if (mCurrentItemUri == null) {
@@ -328,7 +282,6 @@ public class EditorActivity extends AppCompatActivity implements
                 ItemEntry._ID,
                 ItemEntry.COLUMN_ITEM_NAME,
                 ItemEntry.COLUMN_ITEM_QUANTITY,
-                ItemEntry.COLUMN_INVENTORY_GENDER,
                 ItemEntry.COLUMN_ITEM_PRICE };
 
         // This loader will execute the ContentProvider's query method on a background thread
@@ -353,13 +306,11 @@ public class EditorActivity extends AppCompatActivity implements
             // Find the columns of pet attributes that we're interested in
             int nameColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_NAME);
             int breedColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_QUANTITY);
-            int genderColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_INVENTORY_GENDER);
             int priceColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_PRICE);
 
             // Extract out the value from the Cursor for the given column index
             String name = cursor.getString(nameColumnIndex);
             String breed = cursor.getString(breedColumnIndex);
-            int gender = cursor.getInt(genderColumnIndex);
             int price = cursor.getInt(priceColumnIndex);
 
             // Update the views on the screen with the values from the database
@@ -367,20 +318,6 @@ public class EditorActivity extends AppCompatActivity implements
             mQuantityEditText.setText(breed);
             mPriceEditText.setText(Integer.toString(price));
 
-            // Gender is a dropdown spinner, so map the constant value from the database
-            // into one of the dropdown options (0 is Unknown, 1 is Male, 2 is Female).
-            // Then call setSelection() so that option is displayed on screen as the current selection.
-            switch (gender) {
-                case ItemEntry.GENDER_MALE:
-                    mGenderSpinner.setSelection(1);
-                    break;
-                case ItemEntry.GENDER_FEMALE:
-                    mGenderSpinner.setSelection(2);
-                    break;
-                default:
-                    mGenderSpinner.setSelection(0);
-                    break;
-            }
         }
     }
 
@@ -390,7 +327,6 @@ public class EditorActivity extends AppCompatActivity implements
         mNameEditText.setText("");
         mQuantityEditText.setText("");
         mPriceEditText.setText("");
-        mGenderSpinner.setSelection(0); // Select "Unknown" gender
     }
 
     /**
@@ -449,7 +385,7 @@ public class EditorActivity extends AppCompatActivity implements
     }
 
     /**
-     * Perform the deletion of the pet in the database.
+     * Perform the deletion of the item in the database.
      */
     private void deleteItem() {
         // Only perform the delete if this is an existing pet.
