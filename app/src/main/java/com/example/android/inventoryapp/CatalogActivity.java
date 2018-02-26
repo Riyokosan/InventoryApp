@@ -87,7 +87,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     /**
      * Helper method to insert hardcoded item data into the database. For debugging purposes only.
      */
-    private void insertPet() {
+    private void insertItem() {
         // Create a ContentValues object where column names are the keys,
         // and the Strawberries item attributes are the values.
         ContentValues values = new ContentValues();
@@ -105,7 +105,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     /**
      * Helper method to delete all items in the database.
      */
-    private void deleteAllPets(){
+    private void deleteAllItems(){
         int rowsDeleted = getContentResolver().delete(ItemEntry.CONTENT_URI, null, null);
         Log.v("CatalogActivity", rowsDeleted + " rows deleted from item database");
     }
@@ -124,11 +124,11 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         switch (item.getItemId()) {
             // Respond to a click on the "Insert dummy data" menu option
             case R.id.action_insert_dummy_data:
-                insertPet();
+                insertItem();
                 return true;
             // Respond to a click on the "Delete all entries" menu option
             case R.id.action_delete_all_entries:
-                deleteAllPets();
+                deleteAllItems();
                 return true;
         }
         return super.onOptionsItemSelected(item);
