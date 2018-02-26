@@ -70,7 +70,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
         // If the item breed is empty string or null, then use some default text
         // that says "Unknown breed", so the TextView isn't blank.
         if (TextUtils.isEmpty(itemBreed)) {
-            itemBreed = context.getString(R.string.unknown_breed);
+            itemBreed = context.getString(R.string.unknown_quantity);
         }
 
         // Update the TextViews with the attributes for the current item
