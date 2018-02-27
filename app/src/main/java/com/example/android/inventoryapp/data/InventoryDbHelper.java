@@ -25,7 +25,7 @@ public class InventoryDbHelper extends SQLiteOpenHelper  {
                 + ItemEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + ItemEntry.COLUMN_ITEM_NAME + " TEXT NOT NULL, "
                 + ItemEntry.COLUMN_ITEM_QUANTITY + " INTEGER DEFAULT 1, "
-                + ItemEntry.COLUMN_ITEM_PRICE + " NUMERIC NOT NULL);";
+                + ItemEntry.COLUMN_ITEM_PRICE + " REAL NOT NULL);";
         // Log the SQL statement in case of error
         Log.e(LOG_TAG, "Current SQL statement" + SQL_CREATE_ITEMS_TABLE);
         // Execute the SQL statement
