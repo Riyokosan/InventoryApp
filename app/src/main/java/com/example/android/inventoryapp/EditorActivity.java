@@ -139,12 +139,12 @@ public class EditorActivity extends AppCompatActivity implements
         values.put(ItemEntry.COLUMN_ITEM_PRICE, priceString);
 
         // If the weight is not provided by the user, don't try to parse the string into an
-        // integer value. Use 0 by default.
+        // integer value. Use 1 by default.
         int quantity = 1;
         if (!TextUtils.isEmpty(quantityString)) {
             quantity = Integer.parseInt(quantityString);
         }
-        values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantityString);
+        values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantity);
 
         // Determine if this is a new or existing item by checking if mCurrentItemUri is null or not
         if (mCurrentItemUri == null) {
@@ -360,7 +360,7 @@ public class EditorActivity extends AppCompatActivity implements
 
     private void showDeleteConfirmationDialog() {
         // Create an AlertDialog.Builder and set the message, and click listeners
-        // for the postivie and negative buttons on the dialog.
+        // for the postive and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.delete_dialog_msg);
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
