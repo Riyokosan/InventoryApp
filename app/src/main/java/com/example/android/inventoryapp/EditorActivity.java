@@ -65,6 +65,9 @@ public class EditorActivity extends AppCompatActivity implements
         }
     };
 
+    /** Variable to check the quantity at various stages */
+    int quantity = 1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,9 +111,39 @@ public class EditorActivity extends AppCompatActivity implements
         mPriceEditText.setOnTouchListener(mTouchListener);
         mSoldButton.setOnTouchListener(mTouchListener);
         mSoldOutButton.setOnTouchListener(mTouchListener);
-
     }
 
+
+//        Button sold = findViewById(R.id.sold_button);
+//        sold.setOnItemClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String quantityNumber = mQuantityEditText.getText().toString().trim();
+//                int quantityField = Integer.parseInt(quantityNumber);
+//                if (quantityField > 0) {
+//                    quantityField = quantityField - 1;
+//                    EditText textElement = findViewById(R.id.edit_item_quantity);
+//                    textElement.setText(quantityField);
+//
+//                } else {
+//                    Toast.makeText(getApplicationContext(), "Out Stock Please Re Order", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
+
+    public void sold(View view){
+        if (quantity == 0) {
+            //Show error message
+            Toast.makeText(this, "You can't sell an item you do not have", Toast.LENGTH_SHORT).show();
+            // Exist the method not to update the quantity
+            return;
+        }
+        quantity = quantity - 1;
+    }
+
+    public void soldOut(View view){
+        quantity = 0;
+    }
 
     /**
      * Get user input from editor and save item into database.
@@ -140,24 +173,9 @@ public class EditorActivity extends AppCompatActivity implements
 
         // If the weight is not provided by the user, don't try to parse the string into an
         // integer value. Use 1 by default.
-        int quantity = 1;
         if (!TextUtils.isEmpty(quantityString)) {
             quantity = Integer.parseInt(quantityString);
         }
-//        public void oneSold(View view){
-//            if (quantity == 0) {
-//                //Show error message
-//                Toast.makeText(this, "You can't sell an item you do not have", Toast.LENGTH_SHORT).show();
-//                // Exist the method not to update the quantity
-//                return;
-//            }
-//            quantity = quantity - 1;
-//        }
-//
-//        public void soldOut(View view){
-//            quantity = 0;
-//        }
-
         values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantity);
 
         // Determine if this is a new or existing item by checking if mCurrentItemUri is null or not
