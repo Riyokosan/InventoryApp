@@ -338,7 +338,7 @@ public class EditorActivity extends AppCompatActivity implements
             // Find the columns of item attributes that we're interested in
             int nameColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_NAME);
             int quantityColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_QUANTITY);
-            float priceColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_PRICE);
+            int priceColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_PRICE);
 
             // Extract out the value from the Cursor for the given column index
             String name = cursor.getString(nameColumnIndex);
@@ -348,7 +348,7 @@ public class EditorActivity extends AppCompatActivity implements
             // Update the views on the screen with the values from the database
             mNameEditText.setText(name);
             mQuantityEditText.setText(quantity);
-            mPriceEditText.setText(String.format(price));
+            mPriceEditText.setText(Float.toString(price));
 
         }
     }
