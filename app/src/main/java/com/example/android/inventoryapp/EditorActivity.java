@@ -337,18 +337,18 @@ public class EditorActivity extends AppCompatActivity implements
         if (cursor.moveToFirst()) {
             // Find the columns of item attributes that we're interested in
             int nameColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_NAME);
-            int breedColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_QUANTITY);
-            int priceColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_PRICE);
+            int quantityColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_QUANTITY);
+            float priceColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_PRICE);
 
             // Extract out the value from the Cursor for the given column index
             String name = cursor.getString(nameColumnIndex);
-            String breed = cursor.getString(breedColumnIndex);
-            int price = cursor.getInt(priceColumnIndex);
+            String quantity = cursor.getString(quantityColumnIndex);
+            float price = cursor.getFloat(priceColumnIndex);
 
             // Update the views on the screen with the values from the database
             mNameEditText.setText(name);
-            mQuantityEditText.setText(breed);
-            mPriceEditText.setText(Integer.toString(price));
+            mQuantityEditText.setText(quantity);
+            mPriceEditText.setText(String.format(price));
 
         }
     }
