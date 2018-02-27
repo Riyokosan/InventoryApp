@@ -144,6 +144,20 @@ public class EditorActivity extends AppCompatActivity implements
         if (!TextUtils.isEmpty(quantityString)) {
             quantity = Integer.parseInt(quantityString);
         }
+//        public void oneSold(View view){
+//            if (quantity == 0) {
+//                //Show error message
+//                Toast.makeText(this, "You can't sell an item you do not have", Toast.LENGTH_SHORT).show();
+//                // Exist the method not to update the quantity
+//                return;
+//            }
+//            quantity = quantity - 1;
+//        }
+//
+//        public void soldOut(View view){
+//            quantity = 0;
+//        }
+
         values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantity);
 
         // Determine if this is a new or existing item by checking if mCurrentItemUri is null or not
