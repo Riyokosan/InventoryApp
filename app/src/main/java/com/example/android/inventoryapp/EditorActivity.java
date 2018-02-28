@@ -65,8 +65,11 @@ public class EditorActivity extends AppCompatActivity implements
         }
     };
 
-    /** Variable to check the quantity at various stages */
-    int quantity = 1;
+    // Read from input fields
+    // Use trim to eliminate leading or trailing white space
+    String nameString = mNameEditText.getText().toString().trim();
+    String quantityString = mQuantityEditText.getText().toString().trim();
+    String priceString = mPriceEditText.getText().toString().trim();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,6 +134,7 @@ public class EditorActivity extends AppCompatActivity implements
 //            }
 //        });
 
+    int quantity = Integer.parseInt(quantityString);
     public void sold(View view){
         if (quantity == 0) {
             //Show error message
@@ -149,11 +153,11 @@ public class EditorActivity extends AppCompatActivity implements
      * Get user input from editor and save item into database.
      */
     private void saveItem() {
-        // Read from input fields
-        // Use trim to eliminate leading or trailing white space
-        String nameString = mNameEditText.getText().toString().trim();
-        String quantityString = mQuantityEditText.getText().toString().trim();
-        String priceString = mPriceEditText.getText().toString().trim();
+//        // Read from input fields
+//        // Use trim to eliminate leading or trailing white space
+//        String nameString = mNameEditText.getText().toString().trim();
+//        String quantityString = mQuantityEditText.getText().toString().trim();
+//        String priceString = mPriceEditText.getText().toString().trim();
 
         // Check if this is supposed to be a new item
         // and check if all the fields in the editor are blank
@@ -173,6 +177,7 @@ public class EditorActivity extends AppCompatActivity implements
 
         // If the weight is not provided by the user, don't try to parse the string into an
         // integer value. Use 1 by default.
+        int quantity = 1;
         if (!TextUtils.isEmpty(quantityString)) {
             quantity = Integer.parseInt(quantityString);
         }
