@@ -34,7 +34,7 @@
                 android:inputType="textCapWords"
                 style="@style/EditorFieldStyle" />
 
-            <!-- Breed field -->
+            <!-- Quantity field -->
             <EditText
                 android:id="@+id/edit_item_quantity"
                 android:hint="@string/hint_item_quantity"
