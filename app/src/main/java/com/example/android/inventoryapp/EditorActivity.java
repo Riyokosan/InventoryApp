@@ -65,12 +65,6 @@ public class EditorActivity extends AppCompatActivity implements
         }
     };
 
-    // Read from input fields
-    // Use trim to eliminate leading or trailing white space
-    String nameString = mNameEditText.getText().toString().trim();
-    String quantityString = mQuantityEditText.getText().toString().trim();
-    String priceString = mPriceEditText.getText().toString().trim();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -134,8 +128,12 @@ public class EditorActivity extends AppCompatActivity implements
 //            }
 //        });
 
-    int quantity = Integer.parseInt(quantityString);
+
     public void sold(View view){
+        // Read from input fields
+        // Use trim to eliminate leading or trailing white space
+        String quantityString = mQuantityEditText.getText().toString().trim();
+        int quantity = Integer.parseInt(quantityString);
         if (quantity == 0) {
             //Show error message
             Toast.makeText(this, "You can't sell an item you do not have", Toast.LENGTH_SHORT).show();
@@ -143,21 +141,22 @@ public class EditorActivity extends AppCompatActivity implements
             return;
         }
         quantity = quantity - 1;
+        mQuantityEditText.setText(Integer.toString(quantity));
     }
 
     public void soldOut(View view){
-        quantity = 0;
+        mQuantityEditText.setText(Integer.toString(0));
     }
 
     /**
      * Get user input from editor and save item into database.
      */
     private void saveItem() {
-//        // Read from input fields
-//        // Use trim to eliminate leading or trailing white space
-//        String nameString = mNameEditText.getText().toString().trim();
-//        String quantityString = mQuantityEditText.getText().toString().trim();
-//        String priceString = mPriceEditText.getText().toString().trim();
+        // Read from input fields
+        // Use trim to eliminate leading or trailing white space
+        String nameString = mNameEditText.getText().toString().trim();
+        String quantityString = mQuantityEditText.getText().toString().trim();
+        String priceString = mPriceEditText.getText().toString().trim();
 
         // Check if this is supposed to be a new item
         // and check if all the fields in the editor are blank
