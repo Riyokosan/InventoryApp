@@ -38,7 +38,7 @@
             <EditText
                 android:id="@+id/edit_item_quantity"
                 android:hint="@string/hint_item_quantity"
-                android:inputType="textCapWords"
+                android:inputType="numberDecimal"
                 style="@style/EditorFieldStyle" />
         </LinearLayout>
     </LinearLayout>
