@@ -110,25 +110,6 @@ public class EditorActivity extends AppCompatActivity implements
         mSoldOutButton.setOnTouchListener(mTouchListener);
     }
 
-
-//        Button sold = findViewById(R.id.sold_button);
-//        sold.setOnItemClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String quantityNumber = mQuantityEditText.getText().toString().trim();
-//                int quantityField = Integer.parseInt(quantityNumber);
-//                if (quantityField > 0) {
-//                    quantityField = quantityField - 1;
-//                    EditText textElement = findViewById(R.id.edit_item_quantity);
-//                    textElement.setText(quantityField);
-//
-//                } else {
-//                    Toast.makeText(getApplicationContext(), "Out Stock Please Re Order", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
-
-
     public void sold(View view){
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
