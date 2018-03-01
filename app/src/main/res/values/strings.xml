@@ -51,15 +51,6 @@
     <!-- Units for price of the item (euros) [CHAR LIMIT=5] -->
     <string name="unit_item_price">€</string>
 
-    <!-- Label for dropdown menu option if the pet's gender is unknown [CHAR LIMIT=20] -->
-    <string name="gender_unknown">Unknown</string>
-
-    <!-- Label for dropdown menu option if the pet is male [CHAR LIMIT=20] -->
-    <string name="gender_male">Male</string>
-
-    <!-- Label for dropdown menu option if the pet is female [CHAR LIMIT=20] -->
-    <string name="gender_female">Female</string>
-
     <!-- Label for button menu option if one item is sold [CHAR LIMIT=20] -->
     <string name="one_item_sold">1 Sold</string>
 
