@@ -138,12 +138,13 @@ public class EditorActivity extends AppCompatActivity implements
 
     public void order (View view) {
         String itemName = mNameEditText.getText().toString().trim();
+        String currentQuantity = mQuantityEditText.getText().toString().trim();
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:inventoryapp@gmail.com"));
         intent.putExtra(Intent.EXTRA_SUBJECT,
                 getString(R.string.order_summary_email_subject, itemName));
         intent.putExtra(Intent.EXTRA_TEXT,
-                getString(R.string.order_summary_email_text));
+                getString(R.string.order_summary_email_text, currentQuantity));
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }}
@@ -171,10 +172,20 @@ public class EditorActivity extends AppCompatActivity implements
         // Create a ContentValues object where column names are the keys,
         // and item attributes from the editor are the values.
         ContentValues values = new ContentValues();
+
+        if (TextUtils.isEmpty(nameString)) {
+            Toast.makeText(this, "You need to enter a name", Toast.LENGTH_SHORT).show();
+            return;
+        }
         values.put(ItemEntry.COLUMN_ITEM_NAME, nameString);
+
+        if (TextUtils.isEmpty(priceString)) {
+            Toast.makeText(this, "You need to enter a price", Toast.LENGTH_SHORT).show();
+            return;
+        }
         values.put(ItemEntry.COLUMN_ITEM_PRICE, priceString);
 
-        // If the weight is not provided by the user, don't try to parse the string into an
+        // If the quantity is not provided by the user, don't try to parse the string into an
         // integer value. Use 1 by default.
         int quantity = 1;
         if (!TextUtils.isEmpty(quantityString)) {
@@ -396,7 +407,7 @@ public class EditorActivity extends AppCompatActivity implements
 
     private void showDeleteConfirmationDialog() {
         // Create an AlertDialog.Builder and set the message, and click listeners
-        // for the postive and negative buttons on the dialog.
+        // for the positive and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.delete_dialog_msg);
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {

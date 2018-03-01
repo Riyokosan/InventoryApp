@@ -115,9 +115,9 @@
     <string name="cancel">Cancel</string>
 
     <!-- Email subject for the order [CHAR LIMIT=50] -->
-    <string name="order_summary_email_subject">InventoryApp Order</string>
+    <string name="order_summary_email_subject">InventoryApp Order %1$s</string>
 
     <!-- Email subject for the content of the email [CHAR LIMIT=NONE] -->
-    <string name="order_summary_email_text">Current quantity <xliff:g id="edit_item_quantity" example="10">%s</xliff:g></string>
+    <string name="order_summary_email_text">Current quantity %1$s</string>
 
 </resources>
