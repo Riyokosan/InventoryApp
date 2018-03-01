@@ -77,7 +77,7 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <!-- Buttons category -->
+    <!-- Sold Buttons category -->
     <LinearLayout
         android:id="@+id/container_sold"
         android:layout_width="match_parent"
@@ -96,7 +96,7 @@
             android:layout_weight="2"
             android:orientation="horizontal">
 
-            <!-- Gender drop-down spinner -->
+            <!-- Sold Buttons -->
             <Button
                 android:id="@+id/sold_button"
                 android:layout_height="48dp"
@@ -115,5 +115,75 @@
 
         </LinearLayout>
     </LinearLayout>
+
+        <!-- Add Buttons category -->
+        <LinearLayout
+            android:id="@+id/container_add"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                android:text="@string/category_add"
+                style="@style/CategoryStyle" />
+
+            <!-- Input field -->
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <!-- Sold Buttons -->
+                <Button
+                    android:id="@+id/add_button"
+                    android:layout_height="48dp"
+                    android:layout_width="wrap_content"
+                    android:paddingRight="16dp"
+                    android:onClick="add"
+                    android:text="@string/add_one_item"/>
+
+                <Button
+                    android:id="@+id/add_ten_button"
+                    android:layout_height="48dp"
+                    android:layout_width="wrap_content"
+                    android:paddingRight="16dp"
+                    android:onClick="addTen"
+                    android:text="@string/add_ten_items"/>
+
+            </LinearLayout>
+    </LinearLayout>
+
+        <!-- Order Button category -->
+        <LinearLayout
+            android:id="@+id/container_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Label -->
+            <TextView
+                android:text="@string/category_order"
+                style="@style/CategoryStyle" />
+
+            <!-- Input field -->
+            <LinearLayout
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <!-- Sold Buttons -->
+                <ImageButton
+                    android:id="@+id/order_button"
+                    android:layout_height="48dp"
+                    android:layout_width="wrap_content"
+                    android:paddingRight="16dp"
+                    android:onClick="order"
+                    android:src="@drawable/ic_mail"/>
+
+            </LinearLayout>
+        </LinearLayout>
 
 </LinearLayout>

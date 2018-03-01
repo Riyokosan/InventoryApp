@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <!-- Name for the application [CHAR LIMIT=12] -->
     <string name="app_name">InventoryApp</string>
 
@@ -24,8 +24,14 @@
     <!-- Label for overview category of attributes in the editor [CHAR LIMIT=30] -->
     <string name="category_overview">Overview</string>
 
-    <!-- Label for gender information in the editor [CHAR LIMIT=30] -->
+    <!-- Label for selling information in the editor [CHAR LIMIT=30] -->
     <string name="category_sold">Is it sold?</string>
+
+    <!-- Label for adding information in the editor [CHAR LIMIT=30] -->
+    <string name="category_add">More stock?</string>
+
+    <!-- Label for ordering information in the editor [CHAR LIMIT=30] -->
+    <string name="category_order">Order now?</string>
 
     <!-- Label for price information in the editor [CHAR LIMIT=30] -->
     <string name="category_price">Price per unit</string>
@@ -59,6 +65,12 @@
 
     <!-- Label for button menu option if all items are sold [CHAR LIMIT=20] -->
     <string name="sold_out">Sold Out</string>
+
+    <!-- Label for button menu option if one item is sold [CHAR LIMIT=20] -->
+    <string name="add_one_item">Add 1</string>
+
+    <!-- Label for button menu option if all items are sold [CHAR LIMIT=20] -->
+    <string name="add_ten_items">Add 10</string>
 
     <!-- Toast message in editor when new item has been successfully inserted [CHAR LIMIT=NONE] -->
     <string name="editor_insert_item_successful">Item saved</string>
@@ -104,5 +116,8 @@
 
     <!-- Email subject for the order [CHAR LIMIT=50] -->
     <string name="order_summary_email_subject">InventoryApp Order</string>
+
+    <!-- Email subject for the content of the email [CHAR LIMIT=NONE] -->
+    <string name="order_summary_email_text">Current quantity <xliff:g id="edit_item_quantity" example="10">%s</xliff:g></string>
 
 </resources>

@@ -58,12 +58,12 @@ public final class InventoryContract {
         /** Name of database table for inventories */
         public final static String TABLE_NAME = "items";
 
-        /**
-         * Unique ID number for the item (only for use in the database table).
-         *
-         * Type: INTEGER
-         */
-        public final static String _ID = BaseColumns._ID;
+//        /**
+//         * Unique ID number for the item (only for use in the database table).
+//         *
+//         * Type: INTEGER
+//         */
+//        public final static String _ID = BaseColumns._ID;
 
         /**
          * Name of the item.

@@ -17,7 +17,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -43,12 +42,6 @@ public class EditorActivity extends AppCompatActivity implements
 
     /** EditText field to enter the item's price */
     private EditText mPriceEditText;
-
-    /** Button field to enter if one item is sold */
-    private Button mSoldButton;
-
-    /** Button field to enter if one item is sold */
-    private Button mSoldOutButton;
 
     /** Boolean flag that keeps track of whether the item has been edited (true) or not (false) */
     private boolean mItemHasChanged = false;
@@ -97,8 +90,6 @@ public class EditorActivity extends AppCompatActivity implements
         mNameEditText = (EditText) findViewById(R.id.edit_item_name);
         mQuantityEditText = (EditText) findViewById(R.id.edit_item_quantity);
         mPriceEditText = (EditText) findViewById(R.id.edit_item_price);
-        mSoldButton = (Button) findViewById(R.id.sold_button);
-        mSoldOutButton = (Button) findViewById(R.id.sold_out_button);
 
         // Setup OnTouchListeners on all the input fields, so we can determine if the user
         // has touched or modified them. This will let us know if there are unsaved changes
@@ -106,8 +97,6 @@ public class EditorActivity extends AppCompatActivity implements
         mNameEditText.setOnTouchListener(mTouchListener);
         mQuantityEditText.setOnTouchListener(mTouchListener);
         mPriceEditText.setOnTouchListener(mTouchListener);
-        mSoldButton.setOnTouchListener(mTouchListener);
-        mSoldOutButton.setOnTouchListener(mTouchListener);
     }
 
     public void sold(View view){
@@ -128,6 +117,36 @@ public class EditorActivity extends AppCompatActivity implements
     public void soldOut(View view){
         mQuantityEditText.setText(Integer.toString(0));
     }
+
+    public void add(View view){
+        // Read from input fields
+        // Use trim to eliminate leading or trailing white space
+        String quantityString = mQuantityEditText.getText().toString().trim();
+        int quantity = Integer.parseInt(quantityString);
+        quantity = quantity + 1;
+        mQuantityEditText.setText(Integer.toString(quantity));
+    }
+
+    public void addTen(View view){
+        // Read from input fields
+        // Use trim to eliminate leading or trailing white space
+        String quantityString = mQuantityEditText.getText().toString().trim();
+        int quantity = Integer.parseInt(quantityString);
+        quantity = quantity + 10;
+        mQuantityEditText.setText(Integer.toString(quantity));
+    }
+
+    public void order (View view) {
+        String itemName = mNameEditText.getText().toString().trim();
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:inventoryapp@gmail.com"));
+        intent.putExtra(Intent.EXTRA_SUBJECT,
+                getString(R.string.order_summary_email_subject, itemName));
+        intent.putExtra(Intent.EXTRA_TEXT,
+                getString(R.string.order_summary_email_text));
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }}
 
     /**
      * Get user input from editor and save item into database.

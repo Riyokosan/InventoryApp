@@ -44,21 +44,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             }
         });
 
-        //Setup FAB to open email
-        FloatingActionButton email = (FloatingActionButton) findViewById(R.id.email);
-        email.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_SENDTO);
-                intent.setData(Uri.parse("mailto:inventoryapp@gmail.com"));
-                intent.putExtra(Intent.EXTRA_SUBJECT,
-                        getString(R.string.order_summary_email_subject));
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-            }
-        }});
-
-
         // Find the ListView which will be populated with the item data
         ListView inventoryListView = (ListView) findViewById(R.id.list);
 
