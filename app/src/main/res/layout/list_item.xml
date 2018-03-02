@@ -27,8 +27,7 @@
         android:id="@+id/price"
         style="@style/ItemDescription"
         android:layout_alignParentStart="true"
-        android:layout_below="@id/quantity_name"
-        android:hint="16.25" />
+        android:layout_below="@id/quantity_name" />
 
     <TextView
         android:id="@+id/price_symbol"
