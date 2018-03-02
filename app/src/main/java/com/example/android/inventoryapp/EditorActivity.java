@@ -187,11 +187,11 @@ public class EditorActivity extends AppCompatActivity implements
 
         // If the quantity is not provided by the user, don't try to parse the string into an
         // integer value. Use 1 by default.
-        int quantity = 1;
-        if (!TextUtils.isEmpty(quantityString)) {
-            quantity = Integer.parseInt(quantityString);
+        if (TextUtils.isEmpty(quantityString)) {
+            Toast.makeText(this, "You need to enter a quantity", Toast.LENGTH_SHORT).show();
+            return;
         }
-        values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantity);
+        values.put(ItemEntry.COLUMN_ITEM_QUANTITY, quantityString);
 
         // Determine if this is a new or existing item by checking if mCurrentItemUri is null or not
         if (mCurrentItemUri == null) {
