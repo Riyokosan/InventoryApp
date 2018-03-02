@@ -5,4 +5,8 @@
 
     <!-- Common margin value used throughout the app -->
     <dimen name="activity_margin">16dp</dimen>
+
+    <!-- Margin between two text elements -->
+    <dimen name="text_margin">6dp</dimen>
+
 </resources>

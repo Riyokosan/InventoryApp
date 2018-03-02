@@ -49,9 +49,10 @@
         <item name="android:fontFamily">sans-serif-medium</item>
         <item name="android:textAppearance">?android:textAppearanceMedium</item>
         <item name="android:textColor">@color/overviewColorPrimaryDark</item>
+        <item name="android:layout_alignParentStart">true</item>
     </style>
 
-    <style name="ItemQuantity">
+    <style name="ItemDescription">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:fontFamily">sans-serif</item>
