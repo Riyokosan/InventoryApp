@@ -40,7 +40,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/one_item_sold"
-        android:onClick="sold"
         android:layout_below="@id/price"
         android:layout_alignParentStart="true"/>
 
