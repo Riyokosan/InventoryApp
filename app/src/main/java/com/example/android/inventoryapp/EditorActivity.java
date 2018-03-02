@@ -267,6 +267,7 @@ public class EditorActivity extends AppCompatActivity implements
             case R.id.action_delete:
                 // Pop up confirmation dialog for deletion
                 showDeleteConfirmationDialog();
+                break;
                 // Respond to a click on the "Up" arrow button in the app bar
             case android.R.id.home:
                 // If the item hasn't changed, continue with navigating up to parent activity
@@ -412,14 +413,14 @@ public class EditorActivity extends AppCompatActivity implements
         builder.setMessage(R.string.delete_dialog_msg);
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                // User clicked the "Delete" button, so delete the item.
+                // User clicked the "Delete" button, so delete the pet.
                 deleteItem();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 // User clicked the "Cancel" button, so dismiss the dialog
-                // and continue editing the item.
+                // and continue editing the pet.
                 if (dialog != null) {
                     dialog.dismiss();
                 }
@@ -427,8 +428,8 @@ public class EditorActivity extends AppCompatActivity implements
         });
 
         // Create and show the AlertDialog
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     /**
