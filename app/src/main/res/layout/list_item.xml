@@ -44,7 +44,6 @@
         android:layout_below="@id/price"
         android:focusable="false"
         android:focusableInTouchMode="false"
-        android:onClick="sold"
         android:layout_alignParentStart="true"/>
 
 </RelativeLayout>

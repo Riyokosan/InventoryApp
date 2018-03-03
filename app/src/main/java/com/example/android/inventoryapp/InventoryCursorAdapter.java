@@ -1,12 +1,15 @@
 package com.example.android.inventoryapp;
 
+import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CursorAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -65,37 +68,78 @@ public class InventoryCursorAdapter extends CursorAdapter {
         int nameColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_NAME);
         int quantityColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_QUANTITY);
         int priceColumnIndex = cursor.getColumnIndex(ItemEntry.COLUMN_ITEM_PRICE);
+        int idColumnIndex = cursor.getColumnIndex(ItemEntry._ID);
 
         // Read the item attributes from the Cursor for the current item
         String itemName = cursor.getString(nameColumnIndex);
-        String itemQuantity = cursor.getString(quantityColumnIndex);
+        final Integer itemQuantity = cursor.getInt(quantityColumnIndex);
         String itemPrice = cursor.getString(priceColumnIndex);
+        final Integer itemId = cursor.getInt(idColumnIndex);
 
         // Update the TextViews with the attributes for the current item
         nameTextView.setText(itemName);
-        quantityTextView.setText(itemQuantity);
+        quantityTextView.setText(String.valueOf(itemQuantity));
         priceTextView.setText(itemPrice);
+
+        Button saleButton = (Button) view.findViewById(R.id.sold);
+        saleButton.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               if (itemQuantity > 0) {
+                   int newQuantity = itemQuantity - 1;
+                   Uri productUri = ContentUris.withAppendedId(ItemEntry.CONTENT_URI, itemId);
+                   ContentValues values = new ContentValues();
+                   values.put(ItemEntry.COLUMN_ITEM_QUANTITY, newQuantity);
+                   context.getContentResolver().update(productUri, values, null, null);
+                   Toast.makeText(context, context.getString(R.string.success_item_sold), Toast.LENGTH_SHORT).show();
+               } else {
+                   Toast.makeText(context, context.getString(R.string.no_inventory), Toast.LENGTH_SHORT).show();
+               }
+           }
+        });
     }
-
-    /** EditText field to enter the item's quantity */
-    private TextView mQuantityEditText;
-
-    // If the sold button is clicked and the current quantity not null, reduce the quantity by 1
-    public void sold (View view){
-        mQuantityEditText = (TextView) findViewById(R.id.edit_item_quantity);
-        // Read from input fields
-        // Use trim to eliminate leading or trailing white space
-        String quantityString = mQuantityEditText.getText().toString().trim();
-        int quantity = Integer.parseInt(quantityString);
-        if (quantity == 0) {
-            //Show error message
-            Toast.makeText(this, "You can't sell an item you do not have", Toast.LENGTH_SHORT).show();
-            // Exist the method not to update the quantity
-            return;
-        }
-        quantity = quantity - 1;
-        mQuantityEditText.setText(Integer.toString(quantity));
-
-    }
-
 }
+
+
+
+
+
+
+//    // If the sold button is clicked and the current quantity not null, reduce the quantity by 1
+//    public void sold (View view){
+//        mQuantityEditText = (TextView) findViewById(R.id.edit_item_quantity);
+//        // Read from input fields
+//        // Use trim to eliminate leading or trailing white space
+//        String quantityString = mQuantityEditText.getText().toString().trim();
+//        int quantity = Integer.parseInt(quantityString);
+//        if (quantity == 0) {
+//            //Show error message
+//            Toast.makeText(this, "You can't sell an item you do not have", Toast.LENGTH_SHORT).show();
+//            // Exist the method not to update the quantity
+//            return;
+//        }
+//        quantity = quantity - 1;
+//        mQuantityEditText.setText(Integer.toString(quantity));
+//
+//    }
+
+//    Button sold = findViewById(R.id.sold_button);
+//        sold.setOnClickListener(new View.OnClickListener() {
+//        @Override
+//        public void onClick(View v) {
+//            String quantityNumber = mQuantityEditText.getText().toString().trim();
+//            int quantityField = Integer.parseInt(quantityNumber);
+//            if (quantityField > 0){
+//                quantityField = quantityField - 1;
+//                EditText textElement = findViewById(R.id.edit_quantity);
+//                Log.i("Luis", "value of quantityField is: " +
+//                        quantityField);
+//                textElement.setText(quantityField);
+//
+//            }
+//            else {
+//                Toast.makeText(getApplicationContext(),"Out Stock Please Re Order", Toast.LENGTH_LONG).show();
+//            }
+//        }
+//
+//}

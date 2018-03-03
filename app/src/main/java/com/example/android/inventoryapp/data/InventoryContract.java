@@ -58,12 +58,12 @@ public final class InventoryContract {
         /** Name of database table for inventories */
         public final static String TABLE_NAME = "items";
 
-//        /**
-//         * Unique ID number for the item (only for use in the database table).
-//         *
-//         * Type: INTEGER
-//         */
-//        public final static String _ID = BaseColumns._ID;
+        /**
+         * Unique ID number for the item (only for use in the database table).
+         *
+         * Type: INTEGER
+         */
+        public final static String _ID = BaseColumns._ID;
 
         /**
          * Name of the item.
@@ -82,9 +82,16 @@ public final class InventoryContract {
         /**
          * Price of the item.
          *
-         * Type: NUMBER
+         * Type: REAL
          */
         public final static String COLUMN_ITEM_PRICE = "price";
+
+        /**
+         * Image of the item.
+         *
+         * Type: TEXT
+         */
+        public final static String COLUMN_ITEM_IMAGE = "image";
 
     }
 

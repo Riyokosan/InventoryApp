@@ -106,7 +106,7 @@ public class EditorActivity extends AppCompatActivity implements
         int quantity = Integer.parseInt(quantityString);
         if (quantity == 0) {
             //Show error message
-            Toast.makeText(this, "You can't sell an item you do not have", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.no_inventory), Toast.LENGTH_SHORT).show();
             // Exist the method not to update the quantity
             return;
         }
