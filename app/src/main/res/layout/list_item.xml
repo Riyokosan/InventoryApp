@@ -37,10 +37,14 @@
         android:text="@string/unit_item_price" />
 
     <Button
+        android:id="@+id/sold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/one_item_sold"
         android:layout_below="@id/price"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:onClick="sold"
         android:layout_alignParentStart="true"/>
 
 </RelativeLayout>

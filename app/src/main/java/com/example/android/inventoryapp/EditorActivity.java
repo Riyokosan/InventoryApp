@@ -99,7 +99,7 @@ public class EditorActivity extends AppCompatActivity implements
         mPriceEditText.setOnTouchListener(mTouchListener);
     }
 
-    public void sold(View view){
+    public void oneSold(View view){
         // Read from input fields
         // Use trim to eliminate leading or trailing white space
         String quantityString = mQuantityEditText.getText().toString().trim();
@@ -222,11 +222,14 @@ public class EditorActivity extends AppCompatActivity implements
                 Toast.makeText(this, getString(R.string.editor_update_item_failed),
                         Toast.LENGTH_SHORT).show();
             } else {
+
                 // Otherwise, the update was successful and we can display a toast.
                 Toast.makeText(this, getString(R.string.editor_update_item_successful),
                         Toast.LENGTH_SHORT).show();
             }
         }
+        // Exit activity
+        finish();
     }
 
     @Override
@@ -260,8 +263,6 @@ public class EditorActivity extends AppCompatActivity implements
             case R.id.action_save:
                 // Save item to database
                 saveItem();
-                // Exit activity
-                finish();
                 return true;
             // Respond to a click on the "Delete" menu option
             case R.id.action_delete:
@@ -293,7 +294,9 @@ public class EditorActivity extends AppCompatActivity implements
                 showUnsavedChangesDialog(discardButtonClickListener);
                 return true;
         }
+
         return super.onOptionsItemSelected(item);
+
     }
 
     /**

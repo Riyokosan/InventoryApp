@@ -2,12 +2,13 @@ package com.example.android.inventoryapp;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.inventoryapp.data.InventoryContract.ItemEntry;
 
@@ -70,15 +71,31 @@ public class InventoryCursorAdapter extends CursorAdapter {
         String itemQuantity = cursor.getString(quantityColumnIndex);
         String itemPrice = cursor.getString(priceColumnIndex);
 
-        // If the item breed is empty string or null, then use some default text
-        // that says "Unknown breed", so the TextView isn't blank.
-        if (TextUtils.isEmpty(itemQuantity)) {
-            itemQuantity = context.getString(R.string.unknown_quantity);
-        }
-
         // Update the TextViews with the attributes for the current item
         nameTextView.setText(itemName);
         quantityTextView.setText(itemQuantity);
         priceTextView.setText(itemPrice);
     }
+
+    /** EditText field to enter the item's quantity */
+    private TextView mQuantityEditText;
+
+    // If the sold button is clicked and the current quantity not null, reduce the quantity by 1
+    public void sold (View view){
+        mQuantityEditText = (TextView) findViewById(R.id.edit_item_quantity);
+        // Read from input fields
+        // Use trim to eliminate leading or trailing white space
+        String quantityString = mQuantityEditText.getText().toString().trim();
+        int quantity = Integer.parseInt(quantityString);
+        if (quantity == 0) {
+            //Show error message
+            Toast.makeText(this, "You can't sell an item you do not have", Toast.LENGTH_SHORT).show();
+            // Exist the method not to update the quantity
+            return;
+        }
+        quantity = quantity - 1;
+        mQuantityEditText.setText(Integer.toString(quantity));
+
+    }
+
 }
