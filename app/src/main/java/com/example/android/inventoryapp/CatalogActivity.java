@@ -87,15 +87,17 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
      * Helper method to insert hardcoded item data into the database. For debugging purposes only.
      */
     private void insertItem() {
+        Uri uri = Uri.parse("android.resource://com.example.android.inventoryapp/drawable/cake");
+
         // Create a ContentValues object where column names are the keys,
         // and the Strawberries item attributes are the values.
         ContentValues values = new ContentValues();
         values.put(ItemEntry.COLUMN_ITEM_NAME, "Strawberry Cake");
         values.put(ItemEntry.COLUMN_ITEM_QUANTITY, "10");
         values.put(ItemEntry.COLUMN_ITEM_PRICE, 16.25);
-        values.put(ItemEntry.COLUMN_ITEM_IMAGE, R.drawable.cake);
+        values.put(ItemEntry.COLUMN_ITEM_IMAGE, uri.toString());
 
-        // Insert a new row for Toto into the provider using the ContentResolver.
+        // Insert a new row for Strawberry cake into the provider using the ContentResolver.
         // Use the {@link ItemEntry#CONTENT_URI} to indicate that we want to insert
         // into the items database table.
         // Receive the new content URI that will allow us to access Toto's data in the future.
