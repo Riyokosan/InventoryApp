@@ -145,6 +145,11 @@ public class InventoryProvider extends ContentProvider {
             throw new IllegalArgumentException("Item requires a valid price");
         }
 
+        String image = values.getAsString(ItemEntry.COLUMN_ITEM_IMAGE);
+        if (image == null){
+            throw new IllegalArgumentException("Item requires a valid image");
+        }
+
         // Get writable database
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
@@ -194,7 +199,7 @@ public class InventoryProvider extends ContentProvider {
         if (values.containsKey(ItemEntry.COLUMN_ITEM_NAME)) {
             String name = values.getAsString(ItemEntry.COLUMN_ITEM_NAME);
             if (name == null) {
-                throw new IllegalArgumentException("Inventory requires a name");
+                throw new IllegalArgumentException("Item requires a name");
             }
         }
 
@@ -216,6 +221,13 @@ public class InventoryProvider extends ContentProvider {
                 throw new IllegalArgumentException("Item requires valid price");
             }
         }
+
+            if (values.containsKey(ItemEntry.COLUMN_ITEM_IMAGE)) {
+                String image = values.getAsString(ItemEntry.COLUMN_ITEM_IMAGE);
+                if (image == null) {
+                    throw new IllegalArgumentException("Item requires a name");
+                }
+            }
 
         }
         // If there are no values to update, then don't try to update the database

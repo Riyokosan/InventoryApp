@@ -81,6 +81,9 @@
     <!-- Toast message in editor when current pet has failed to be updated [CHAR LIMIT=NONE] -->
     <string name="editor_update_item_failed">Error with updating item</string>
 
+    <!-- Toast message in editor when current pet has failed to be updated [CHAR LIMIT=NONE] -->
+    <string name="editor_insert_item_image_failed">Error with adding the image</string>
+
     <!-- Title text for the empty view, which describes the sad smiley image [CHAR LIMIT=50] -->
     <string name="empty_view_title_text">No item has been entered yet&#8230;</string>
 

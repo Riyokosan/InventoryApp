@@ -58,7 +58,7 @@ public class InventoryCursorAdapter extends CursorAdapter {
      *                correct row.
      */
     @Override
-    public void bindView(View view, Context context, Cursor cursor) {
+    public void bindView(View view, final Context context, Cursor cursor) {
         // Find individual views that we want to modify in the list item layout
         TextView nameTextView = (TextView) view.findViewById(R.id.name);
         TextView quantityTextView = (TextView) view.findViewById(R.id.quantity);
@@ -81,8 +81,8 @@ public class InventoryCursorAdapter extends CursorAdapter {
         quantityTextView.setText(String.valueOf(itemQuantity));
         priceTextView.setText(itemPrice);
 
-        Button saleButton = (Button) view.findViewById(R.id.sold);
-        saleButton.setOnClickListener(new View.OnClickListener() {
+        Button sold = (Button) view.findViewById(R.id.sold);
+        sold.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
                if (itemQuantity > 0) {
@@ -99,47 +99,3 @@ public class InventoryCursorAdapter extends CursorAdapter {
         });
     }
 }
-
-
-
-
-
-
-//    // If the sold button is clicked and the current quantity not null, reduce the quantity by 1
-//    public void sold (View view){
-//        mQuantityEditText = (TextView) findViewById(R.id.edit_item_quantity);
-//        // Read from input fields
-//        // Use trim to eliminate leading or trailing white space
-//        String quantityString = mQuantityEditText.getText().toString().trim();
-//        int quantity = Integer.parseInt(quantityString);
-//        if (quantity == 0) {
-//            //Show error message
-//            Toast.makeText(this, "You can't sell an item you do not have", Toast.LENGTH_SHORT).show();
-//            // Exist the method not to update the quantity
-//            return;
-//        }
-//        quantity = quantity - 1;
-//        mQuantityEditText.setText(Integer.toString(quantity));
-//
-//    }
-
-//    Button sold = findViewById(R.id.sold_button);
-//        sold.setOnClickListener(new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
-//            String quantityNumber = mQuantityEditText.getText().toString().trim();
-//            int quantityField = Integer.parseInt(quantityNumber);
-//            if (quantityField > 0){
-//                quantityField = quantityField - 1;
-//                EditText textElement = findViewById(R.id.edit_quantity);
-//                Log.i("Luis", "value of quantityField is: " +
-//                        quantityField);
-//                textElement.setText(quantityField);
-//
-//            }
-//            else {
-//                Toast.makeText(getApplicationContext(),"Out Stock Please Re Order", Toast.LENGTH_LONG).show();
-//            }
-//        }
-//
-//}

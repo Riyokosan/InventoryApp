@@ -9,4 +9,7 @@
     <!-- Margin between two text elements -->
     <dimen name="text_margin">6dp</dimen>
 
+    <!-- Dimensions for items image -->
+    <dimen name="image_height">300px</dimen>
+
 </resources>
